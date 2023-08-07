@@ -22,9 +22,9 @@ namespace AzFncWebCounter.Functions
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
-            string dataBaseName = Environment.GetEnvironmentVariable("DBName");
+            string dataBaseName = Environment.GetEnvironmentVariable("DatabaseName");
             string containerName = Environment.GetEnvironmentVariable("ContainerName");
-            string connectionString = Environment.GetEnvironmentVariable("DBConnStr");
+            string connectionString = Environment.GetEnvironmentVariable("ConnectionString");
 
             string json;
 
@@ -44,7 +44,8 @@ namespace AzFncWebCounter.Functions
             {
                 log.LogError(ex.Message);
 
-                // At least return the error message in JSON format
+                // At least return the error message in JSON format as part of the Id
+                // This way, the client can still read the error message
                 var error = new WebCounterModel
                 {
                     Id = ex.Message,
