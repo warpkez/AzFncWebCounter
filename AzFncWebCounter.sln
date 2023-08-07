@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzFncWebCounter", "AzFncWebCounter\AzFncWebCounter.csproj", "{F336E49B-0D96-4949-AEB3-D765478BD9A3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AzFncWebCounter", "AzFncWebCounter\AzFncWebCounter.csproj", "{F336E49B-0D96-4949-AEB3-D765478BD9A3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9560A383-A8C5-4430-A7C9-F8B2CAC71EA3}"
+	ProjectSection(SolutionItems) = preProject
+		LICENSE.txt = LICENSE.txt
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
