@@ -22,16 +22,21 @@ namespace AzFncWebCounter.Functions
         {
             log.LogInformation("C# HTTP trigger function processed a request.");
 
+            string dataBaseName = Environment.GetEnvironmentVariable("DBName");
+            string containerName = Environment.GetEnvironmentVariable("ContainerName");
+            string connectionString = Environment.GetEnvironmentVariable("DBConnStr");
+
             string json;
+
             try
             {
-                CosmosClient cosmosClient = new(Environment.GetEnvironmentVariable("DBConnStr"));
+                CosmosClient cosmosClient = new(connectionString);
 
-                await WebCounterMethod.CreateContainerIfNotExistsAsync(cosmosClient, Environment.GetEnvironmentVariable("DBName"), Environment.GetEnvironmentVariable("ContainerName"));
+                await WebCounterMethod.CreateContainerIfNotExistsAsync(cosmosClient, dataBaseName, containerName);
 
-                await WebCounterMethod.IsFirstTimeAsync(cosmosClient, Environment.GetEnvironmentVariable("DBName"), Environment.GetEnvironmentVariable("ContainerName"));
+                await WebCounterMethod.IsFirstTimeAsync(cosmosClient, dataBaseName, containerName);
 
-                var counted = await WebCounterMethod.GetCountAsync(cosmosClient, Environment.GetEnvironmentVariable("DBName"), Environment.GetEnvironmentVariable("ContainerName"));
+                var counted = await WebCounterMethod.GetCountAsync(cosmosClient, dataBaseName, containerName);
 
                 json = JsonConvert.SerializeObject(counted, Formatting.Indented);
             }
