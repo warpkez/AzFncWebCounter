@@ -38,9 +38,19 @@ namespace AzFncWebCounter.Functions
             catch (Exception ex)
             {
                 log.LogError(ex.Message);
-                json = JsonConvert.SerializeObject(ex.Message);
+
+                // At least return the error message in JSON format
+                var error = new WebCounterModel
+                {
+                    Id = ex.Message,
+                    Counter = -1,
+                    Timestamp = DateTime.UtcNow
+                };
+
+                json = JsonConvert.SerializeObject(error);
             }
 
+            // Even if everything breaks, it is okay! Won't they be surprised when they see the error message!
             return new OkObjectResult(json);
         }
     }

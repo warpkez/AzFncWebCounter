@@ -23,6 +23,7 @@ public static partial class WebCounterMethod
         var container = cosmosClient.GetContainer(databaseName, containerName);
 
         // Get the count of items in the container
+        // We only need to know if there is something is in the container or not - its contents are irrelevant
         var count = await container.GetItemQueryIterator<int>("SELECT VALUE COUNT(1) FROM c").ReadNextAsync();
 
         // If the count is 0, then this is the first time the function is run
@@ -44,6 +45,7 @@ public static partial class WebCounterMethod
             trigger = false;
         }
 
+        // Are you triggered?
         return trigger;
     }
 
